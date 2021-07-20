@@ -3,7 +3,14 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import { PanGesture, Home } from './screenConfigs';
 
-const Stack = createStackNavigator();
+type MainStackParamTypes = {
+  Home: undefined;
+  PanGesture: {
+    title: string
+  };
+}
+
+const Stack = createStackNavigator<MainStackParamTypes>();
 
 const MainNavigator: React.FC = () => {
   return (
