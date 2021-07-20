@@ -1,12 +1,14 @@
 import React from 'react';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import { PanGesture } from './screenConfigs';
+
 const Stack = createStackNavigator();
 
-const MainNavigator: React.FC<{ name: string }> = ({ name }) => {
+const MainNavigator: React.FC = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="PanGesture" component={''} />
+      <Stack.Screen name="PanGesture" component={PanGesture} />
     </Stack.Navigator>
   );
 };
