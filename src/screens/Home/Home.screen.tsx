@@ -9,13 +9,18 @@ interface Page {
   pageName: string;
 }
 
+const pages: Page[] = [
+  {
+    title: 'Worklet Sanbox',
+    pageName: 'Worklet'
+  },
+  {
+    title: 'Pan Gesture',
+    pageName: 'PanGesture'
+  }
+];
+
 const Home: React.FC = () => {
-  const pages: Page[] = [
-    {
-      title: 'Pan Gesture',
-      pageName: 'PanGesture'
-    }
-  ];
   const navigation = useNavigation();
 
   const onPressCard = (pageName: string, title: string) => () => {
@@ -26,7 +31,12 @@ const Home: React.FC = () => {
 
   const renderCard = (page: Page, i: number) => {
     return (
-      <TouchableOpacity key={i} style={styles.card} activeOpacity={0.8} onPress={onPressCard(page.pageName, page.title)}>
+      <TouchableOpacity
+        key={i}
+        style={styles.card}
+        activeOpacity={0.8}
+        onPress={onPressCard(page.pageName, page.title)}
+      >
         <Text>{page.title}</Text>
       </TouchableOpacity>
     );

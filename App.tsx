@@ -8,6 +8,7 @@
  * @format
  */
 
+import 'react-native-reanimated';
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
