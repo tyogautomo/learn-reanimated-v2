@@ -10,14 +10,13 @@
 
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { ScrollView, Text } from 'react-native';
+
+import { MainNavigator } from './src/navigations/mainNavigator';
 
 const App = () => {
   return (
     <NavigationContainer>
-      <ScrollView>
-        <Text>Test</Text>
-      </ScrollView>
+      <MainNavigator />
     </NavigationContainer>
   );
 };
