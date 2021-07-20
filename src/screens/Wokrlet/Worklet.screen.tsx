@@ -29,7 +29,7 @@ const Worklet: React.FC = () => {
           (name) => setArtistName(name)
         )}
       >
-        <Text>PRESS ME! and watch the Log!</Text>
+        <Text style={styles.buttonText}>PRESS ME! and watch the Log!</Text>
       </TouchableOpacity>
     );
   };

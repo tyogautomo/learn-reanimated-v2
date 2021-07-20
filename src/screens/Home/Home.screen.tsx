@@ -1,8 +1,9 @@
 import React from 'react';
 import { useNavigation } from '@react-navigation/native';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View } from 'react-native';
 
 import { styles } from './Home.style';
+import { MenuButton } from '../../components/MenuButton/MenuButton.component';
 
 interface Page {
   title: string;
@@ -31,14 +32,11 @@ const Home: React.FC = () => {
 
   const renderCard = (page: Page, i: number) => {
     return (
-      <TouchableOpacity
+      <MenuButton
         key={i}
-        style={styles.card}
-        activeOpacity={0.8}
+        title={page.title}
         onPress={onPressCard(page.pageName, page.title)}
-      >
-        <Text>{page.title}</Text>
-      </TouchableOpacity>
+      />
     );
   };
 
