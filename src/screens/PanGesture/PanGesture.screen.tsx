@@ -1,16 +1,20 @@
 import React, { useEffect } from 'react';
+import { useHeaderHeight } from '@react-navigation/stack';
 import { useRoute, useNavigation } from '@react-navigation/native';
 import { PanGestureHandlerEventPayload, PanGestureHandler } from 'react-native-gesture-handler';
+import { View, Dimensions } from 'react-native';
+import { clamp } from 'react-native-redash';
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,
   useSharedValue,
   withDecay
 } from 'react-native-reanimated';
-import { View } from 'react-native';
 
 import { styles } from './PanGesture.styles';
 import { Card } from '../../components/Card/Card.component';
+
+const { width: deviceWidth, height: deviceHeight } = Dimensions.get('window');
 
 type ScreenParams = {
   title: string;
@@ -24,8 +28,12 @@ type PanGestureContext = {
 const PanGesture: React.FC<{ pageName: string }> = () => {
   const route = useRoute();
   const navigation = useNavigation();
-  const translateX = useSharedValue(0);
-  const translateY = useSharedValue(0);
+  const headerHeight = useHeaderHeight();
+  const translateX = useSharedValue<number>(0);
+  const translateY = useSharedValue<number>(0);
+
+  const boundX: number = deviceWidth - (deviceWidth * 0.75);
+  const boundY: number = deviceHeight - (deviceWidth * 0.4) - headerHeight;
 
   useEffect(() => {
     const title = (route.params as ScreenParams).title;
@@ -38,12 +46,18 @@ const PanGesture: React.FC<{ pageName: string }> = () => {
       ctx.offsetY = translateY.value;
     },
     onActive: (event: PanGestureHandlerEventPayload, ctx: PanGestureContext) => {
-      translateX.value = ctx.offsetX + event.translationX;
-      translateY.value = ctx.offsetY + event.translationY;
+      translateX.value = clamp(ctx.offsetX + event.translationX, 0, boundX);
+      translateY.value = clamp(ctx.offsetY + event.translationY, 0, boundY);
     },
     onEnd: (event: PanGestureHandlerEventPayload) => {
-      translateX.value = withDecay({ velocity: event.velocityX });
-      translateY.value = withDecay({ velocity: event.velocityY });
+      translateX.value = withDecay({
+        velocity: event.velocityX,
+        clamp: [0, boundX]
+      });
+      translateY.value = withDecay({
+        velocity: event.velocityY,
+        clamp: [0, boundY]
+      });
     }
   });
 
