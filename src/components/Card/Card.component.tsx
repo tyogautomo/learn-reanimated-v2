@@ -3,9 +3,13 @@ import { View } from 'react-native';
 
 import { styles } from './Card.style';
 
-const Card: React.FC = () => {
+type ScreenProps = {
+  backgroundColor?: string;
+}
+
+const Card: React.FC<ScreenProps> = ({ backgroundColor }) => {
   return (
-    <View style={styles.container} />
+    <View style={[styles.container, { backgroundColor }]} />
   );
 };
 
