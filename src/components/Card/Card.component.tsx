@@ -9,7 +9,7 @@ type ScreenProps = {
 
 const Card: React.FC<ScreenProps> = ({ backgroundColor }) => {
   return (
-    <View style={[styles.container, { backgroundColor }]} />
+    <View style={[styles.container, backgroundColor ? { backgroundColor } : null]} />
   );
 };
 

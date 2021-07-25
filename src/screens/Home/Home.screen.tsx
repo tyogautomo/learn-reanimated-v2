@@ -18,6 +18,10 @@ const pages: Page[] = [
   {
     title: 'Pan Gesture',
     pageName: 'PanGesture'
+  },
+  {
+    title: 'Transitions',
+    pageName: 'Transitions'
   }
 ];
 

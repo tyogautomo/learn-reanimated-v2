@@ -7,7 +7,8 @@ const styles = StyleSheet.create({
     width: deviceWidth * 0.75,
     height: deviceWidth * 0.4,
     backgroundColor: 'skyblue',
-    borderRadius: 8
+    borderRadius: 8,
+    elevation: 2
   }
 });
 
