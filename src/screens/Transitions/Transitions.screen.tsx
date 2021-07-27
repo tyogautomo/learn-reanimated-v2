@@ -15,17 +15,22 @@ type CardType = {
 
 const cards: CardType[] = [{ color: '#d98164' }, { color: '#d9a064' }, { color: '#d9c964' }];
 
-const Transitions: React.FC = () => {
-  const [toggled, setToggled] = useState<boolean>(false);
+const useSpring = (state: boolean) => {
   const isToggled = useSharedValue<number>(0);
 
-  const transition = useDerivedValue(() => {
+  useEffect(() => {
+    isToggled.value = Number(state);
+  }, [state, isToggled]);
+
+  return useDerivedValue(() => {
     return withSpring(isToggled.value);
   });
+};
 
-  useEffect(() => {
-    isToggled.value = Number(toggled);
-  }, [toggled, isToggled]);
+const Transitions: React.FC = () => {
+  const [toggled, setToggled] = useState<boolean>(false);
+
+  const transition = useSpring(toggled);
 
   const onPressButton = () => {
     setToggled(prevState => !prevState);
